@@ -1,5 +1,7 @@
 Frontend Technical Test for Connect Group www.connect-group.com
 
+Node v12.0.0
+
 ````
 yarn
 

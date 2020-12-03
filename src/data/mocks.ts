@@ -1,32 +1,5 @@
 import { IVehicle, IVehicleData } from "./schema";
 
-export function mock_useGetVehicles() {
-  return [
-    {
-      id: "xe",
-      modelYear: "k17",
-      url: "/api/vehicle/xe",
-      media: [
-        {
-          name: "vehicle",
-          url: "/images/xe_k17.jpg",
-        },
-      ],
-    },
-    {
-      id: "xf",
-      modelYear: "k17",
-      url: "/api/vehicle/xf",
-      media: [
-        {
-          name: "vehicle",
-          url: "/images/xf_k17.jpg",
-        },
-      ],
-    },
-  ] as IVehicle[];
-}
-
 export function mock_loadVehiclesResource() {
   return new Promise((resolve) =>
     setTimeout(

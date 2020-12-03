@@ -1,0 +1,23 @@
+@import '../theme/variables';
+
+.VehicleList {
+  // Limit width for extra large screens
+  @media (min-width: $breakpoint_xlarge) {
+    width: 1600px;
+    margin: 0 auto;
+  }
+  // Grid
+  @media (min-width: $breakpoint_small) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  // Grid Sizes
+  > * {
+    @media (min-width: $breakpoint_small) {
+      width: 50%;
+    }
+    @media (min-width: $breakpoint_large) {
+      width: 25%;
+    }
+  }
+}
