@@ -4,6 +4,7 @@ import axios from "axios";
 import { wrapPromise } from "./utils";
 import { DataContext, TEST_MODE } from "./context";
 import { mock_loadVehiclesResource, mock_getVehicleData } from "./mocks";
+import { getBasicCache, setBasicCache } from "./cache";
 
 // Get individual vehicle data
 
@@ -15,6 +16,12 @@ export function useGetVehicleData(url: string) {
   const [vehicleData, setVehicleData] = useState({} as IVehicleData);
 
   useEffect(() => {
+    const cache = getBasicCache(`/vehicles${url}`);
+    if (cache) {
+      setVehicleData(cache);
+      return;
+    }
+
     async function getVehicleData() {
       const genericError: Error = new Error("Product Not Found.");
       setLoading(true);
@@ -30,6 +37,7 @@ export function useGetVehicleData(url: string) {
           throw genericError;
         } else {
           setVehicleData(response.data as IVehicleData);
+          setBasicCache(`/vehicles${url}`, response.data as IVehicleData);
         }
       } catch (error: unknown) {
         if (error instanceof Error) setError(error.message);
@@ -73,6 +81,10 @@ function loadVehiclesMock() {
 
 export function useGetVehicles() {
   const { mode } = useContext(DataContext);
+
+  const cache = getBasicCache("/vehicles");
+  if (cache) return cache;
+
   if (!vehiclesResource) {
     if (mode === TEST_MODE) {
       loadVehiclesMock();
@@ -80,5 +92,9 @@ export function useGetVehicles() {
       loadVehiclesResource();
     }
   }
-  return (vehiclesResource.read() as unknown) as IVehicle[];
+
+  const results = (vehiclesResource.read() as unknown) as IVehicle[];
+  setBasicCache("./vehicles", results);
+
+  return results;
 }

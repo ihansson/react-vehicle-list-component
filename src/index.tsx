@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <DataContext.Provider value={true ? defaultDataContext : testDataContext}>
       <ErrorBoundary>
-        <Suspense fallback={<h1>Suspsense</h1>}>
+        <Suspense fallback={<h1>Suspense</h1>}>
           <VehicleList />
         </Suspense>
       </ErrorBoundary>
