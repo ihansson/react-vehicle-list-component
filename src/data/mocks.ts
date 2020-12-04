@@ -30,7 +30,7 @@ export function mock_loadVehiclesResource() {
             ],
           },
         ] as IVehicle[]),
-      5000
+      500
     )
   ).then((vehicles: unknown) => {
     if (Array.isArray(vehicles)) {
@@ -69,3 +69,21 @@ export function mock_getVehicleData(url: string) {
     }, 500);
   });
 }
+
+// Single Vehicle for testing
+
+export const testVehicle = {
+  id: "xe",
+  modelYear: "k17",
+  url: "/api/vehicle/xe",
+  image: {
+    name: "vehicle",
+    url: "/images/xe_k17.jpg",
+  },
+  media: [
+    {
+      name: "vehicle",
+      url: "/images/xe_k17.jpg",
+    },
+  ],
+};

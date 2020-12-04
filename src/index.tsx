@@ -2,11 +2,7 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { ErrorBoundary } from "./components/ErrorBoundry";
 import { VehicleList } from "./components/VehicleList";
-import {
-  DataContext,
-  defaultDataContext,
-  testDataContext,
-} from "./data/context";
+import { DataContext, defaultDataContext } from "./data/context";
 import "./theme/reset.scss";
 import "./theme/base.scss";
 import { Spinner } from "./components/Spinner";
@@ -14,7 +10,7 @@ import { Spinner } from "./components/Spinner";
 ReactDOM.render(
   <React.StrictMode>
     {/* The DataContext provides { mode } to tell data providers whether to use live or mock data. */}
-    <DataContext.Provider value={true ? defaultDataContext : testDataContext}>
+    <DataContext.Provider value={defaultDataContext}>
       <ErrorBoundary>
         {/* Suspense catches initial loading of vehicles */}
         <Suspense

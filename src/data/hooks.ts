@@ -18,6 +18,7 @@ export function useGetVehicleData(url: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [vehicleData, setVehicleData] = useState({} as IVehicleData);
+  const [cancelled, setCancelled] = useState(false);
 
   // Effect to handle axios request or return cache, dependent on the mode and url.
   // Should only fire once per component.
@@ -34,6 +35,8 @@ export function useGetVehicleData(url: string) {
     // Make async request for new vehicles
 
     async function getVehicleData() {
+      if (cancelled) return;
+
       // Error if we don't provide a url or the response data is not as expected
 
       const genericError: Error = new Error("Product Not Found.");
@@ -53,8 +56,10 @@ export function useGetVehicleData(url: string) {
 
         // Set vehicle data and save cache
 
-        setVehicleData(response.data as IVehicleData);
-        setBasicCache(`/vehicles${url}`, response.data as IVehicleData);
+        if (!cancelled) {
+          setVehicleData(response.data as IVehicleData);
+          setBasicCache(`/vehicles${url}`, response.data as IVehicleData);
+        }
       } catch (error: unknown) {
         if (error instanceof Error) setError(error.message);
       }
@@ -63,7 +68,12 @@ export function useGetVehicleData(url: string) {
     }
 
     getVehicleData();
-  }, [url, mode]);
+
+    // Cancel on unmount to prevent setting vehicledata if component got dismounted
+    return () => {
+      setCancelled(true);
+    };
+  }, [url, mode, cancelled]);
 
   return [loading, error, vehicleData] as [boolean, string, IVehicleData];
 }
