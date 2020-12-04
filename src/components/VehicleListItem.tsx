@@ -14,8 +14,9 @@ export const VehicleListItem = ({
 }) => {
   // Get additional data on the fly
   const [dataLoading, dataError, vehicleData] = useGetVehicleData(vehicle.url);
-  const [visible, setVisible] = useState(false);
 
+  // Handle delayed appearance for on load animation
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setVisible(true);

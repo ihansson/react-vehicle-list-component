@@ -17,7 +17,7 @@
       width: auto;
     }
     &__content {
-      height: 100%;
+      flex-grow: 2;
     }
   }
 
@@ -53,6 +53,7 @@
   // Vehicle Title
   &__title {
     font-size: $font_size_large;
+    line-height: 1.1em;
     text-transform: uppercase;
     letter-spacing: 0.075em;
     margin: 0 0 0.5em;
