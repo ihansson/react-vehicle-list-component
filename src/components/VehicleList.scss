@@ -1,11 +1,6 @@
 @import '../theme/variables';
 
 .VehicleList {
-  // Limit width for extra large screens
-  @media (min-width: $breakpoint_xlarge) {
-    width: 1600px;
-    margin: 0 auto;
-  }
   // Grid
   @media (min-width: $breakpoint_small) {
     display: flex;
@@ -20,4 +15,9 @@
       width: 25%;
     }
   }
+}
+
+.VehicleListPlaceholder {
+  padding: 5em 0;
+  text-align: center;
 }

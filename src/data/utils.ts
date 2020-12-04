@@ -1,13 +1,14 @@
-export function wrapPromise(promise: any) {
+// Helper to wrap a promise and throw promises to suspense when read
+export function wrapPromise(promise: Promise<any>) {
   let status = "pending";
   let response: string;
 
   const suspender = promise.then(
-    (res: any) => {
+    (res: string) => {
       status = "success";
       response = res;
     },
-    (err: any) => {
+    (err: string) => {
       status = "error";
       response = err;
     }

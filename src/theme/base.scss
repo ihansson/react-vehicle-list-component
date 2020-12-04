@@ -1,8 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500;600&display=swap');
+@import 'variables.scss';
 
 body {
   font-family: 'Maven Pro', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: 1.4em;
+  font-size: calc(5px + 1.3vw);
+
+  // Responsive scaling
+  @media (min-width: $breakpoint_small){
+    font-size: calc(5px + 0.76vw);
+  }
+  @media (min-width: $breakpoint_large){
+    font-size: calc(5px + 0.38vw);
+  }
+
 }
 
 h1,h2,h3,h3,h4,h5,h6,strong {

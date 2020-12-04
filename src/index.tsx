@@ -9,12 +9,21 @@ import {
 } from "./data/context";
 import "./theme/reset.scss";
 import "./theme/base.scss";
+import { Spinner } from "./components/Spinner";
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* The DataContext provides { mode } to tell data providers whether to use live or mock data. */}
     <DataContext.Provider value={true ? defaultDataContext : testDataContext}>
       <ErrorBoundary>
-        <Suspense fallback={<strong className="Loading">Loading</strong>}>
+        {/* Suspense catches initial loading of vehicles */}
+        <Suspense
+          fallback={
+            <div className="VehicleListPlaceholder">
+              <Spinner />
+            </div>
+          }
+        >
           <VehicleList />
         </Suspense>
       </ErrorBoundary>

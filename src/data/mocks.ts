@@ -1,5 +1,7 @@
 import { IVehicle, IVehicleData } from "./schema";
 
+// Returns a promise to resolve to mock vehicles list after a timeout
+
 export function mock_loadVehiclesResource() {
   return new Promise((resolve) =>
     setTimeout(
@@ -23,15 +25,26 @@ export function mock_loadVehiclesResource() {
             media: [
               {
                 name: "vehicle",
-                url: "/images/xf_k17.jpg",
+                url: "/images/broken.jpg",
               },
             ],
           },
         ] as IVehicle[]),
-      500
+      5000
     )
-  );
+  ).then((vehicles: unknown) => {
+    if (Array.isArray(vehicles)) {
+      return vehicles.map((vehicle: IVehicle) => {
+        vehicle.image = vehicle.media.length === 0 ? null : vehicle.media[0];
+        return vehicle;
+      });
+    } else {
+      return null;
+    }
+  });
 }
+
+// Returns a promise to resolve to mock individual vehicle data after a timeout
 
 export function mock_getVehicleData(url: string) {
   return new Promise((resolve) => {
@@ -53,6 +66,6 @@ export function mock_getVehicleData(url: string) {
           },
         } as IVehicleData,
       });
-    }, 1000);
+    }, 500);
   });
 }

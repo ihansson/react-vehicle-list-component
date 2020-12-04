@@ -2,31 +2,48 @@
 
 .VehicleListItem {
 
-  // Mobile Grid
-  @media (max-width: $breakpoint_small) {
-    display: flex;
-    &__content {
-      width: 65%;
-    }
+  // Layout
+  display: flex;
+  &__content {
+    width: 65%;
+  }
+  &__media {
+    width: 35%;
+  }
+  @media (min-width: $breakpoint_small) {
+    flex-direction: column;
+    &__content,
     &__media {
-      width: 35%;
+      width: auto;
+    }
+    &__content {
+      height: 100%;
     }
   }
 
   // Vehicle Content Block
   &__content {
-    padding: 2em;
+    padding: 2em 2.5em;
+    border-bottom: 2px solid $color_xlight;
     @media (min-width: $breakpoint_small) {
+      border-left: 1px solid $color_xlight;
+      border-right: 1px solid $color_xlight;
+      padding: 3.5em 2em;
       text-align: center;
     }
   }
 
   // Image Container
   &__media {
+    line-height: 0;
+    background: $color_xlight;
     align-items: center;
     justify-content: center;
-
-    img {
+    @media (min-width: $breakpoint_small) {
+      height: 24.75em;
+    }
+    img,
+    .imagePlaceholder {
       object-fit: cover;
       height: 100%;
       width: 100%;
@@ -37,36 +54,50 @@
   &__title {
     font-size: $font_size_large;
     text-transform: uppercase;
-    margin: 0.5em 0;
+    letter-spacing: 0.075em;
+    margin: 0 0 0.5em;
     // Border Lines for Vehicle Title On Desktop
     @media (min-width: $breakpoint_small) {
       position: relative;
       display: inline-block;
-      padding: 0.25em 0;
+      padding: 0.4em 0;
+      margin: 0 0 1.1em;
       &:before,
       &:after {
         content: '';
         position: absolute;
-        height: 3px;
+        height: 2px;
         background: $color_dark;
         width: 100%;
         top: 0;
         left: 0;
       }
       &:after {
-        top: auto;
-        bottom: 0;
+        top: 100%;
       }
     }
   }
 
-  // Additional Data Formatting
+  // Content Formatting
+
+  &__price {
+    font-size: $font_size_medium;
+    letter-spacing: 0.1em;
+    @media (min-width: $breakpoint_small) {
+      font-size: $font_size_small;
+    }
+  }
+
   &__data {
     color: $color_light;
   }
 
   &__description {
-    margin: 0.5em 0;
-    font-size: $font_size_medium;
+    margin: 0.6em 0 0;
+    font-size: $font_size_small;
+    line-height: 1.4em;
+    @media (min-width: $breakpoint_small) {
+      font-size: $font_size_medium;
+    }
   }
 }

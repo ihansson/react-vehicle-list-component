@@ -1,3 +1,5 @@
+// Basic / naive cache implementation
+
 const CACHE: any = {};
 
 export function setBasicCache(path: string, value: any) {
