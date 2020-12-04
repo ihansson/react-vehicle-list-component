@@ -1,15 +1,32 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { IVehicle } from "../data/schema";
 import { useGetVehicleData } from "../data/hooks";
 import "./VehicleListItem.scss";
 import { ImageWithFallback } from "./ImageWithFallback";
 import { ContentPlaceholder } from "./ContentPlaceholder";
 
-export const VehicleListItem = ({ vehicle }: { vehicle: IVehicle }) => {
+export const VehicleListItem = ({
+  vehicle,
+  delayAppearance = 0,
+}: {
+  vehicle: IVehicle;
+  delayAppearance?: number;
+}) => {
   // Get additional data on the fly
   const [dataLoading, dataError, vehicleData] = useGetVehicleData(vehicle.url);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setVisible(true);
+    }, delayAppearance);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [delayAppearance]);
+
   return (
-    <article className="VehicleListItem">
+    <article className={"VehicleListItem " + (visible ? "hasAppeared" : "")}>
       <figure className="VehicleListItem__media">
         <ImageWithFallback image={vehicle.image} />
       </figure>

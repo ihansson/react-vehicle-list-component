@@ -20,7 +20,7 @@ export const ImageWithFallback = ({ image }: { image: IMedia | null }) => {
       {showFallback || !image ? (
         <div className="imagePlaceholder" />
       ) : (
-        <img src={image.url} alt={image.name} />
+        <img className="imageLazy" src={image.url} alt={image.name} />
       )}
     </Fragment>
   );
